@@ -54,6 +54,9 @@ public class DrawerMenuView extends ScrollView {
         boolean z2 = false;
         for (int i2 = 0; i2 < ExteraConfig.getMainMenuLayout().size(); i2++) {
             Integer num = ExteraConfig.getMainMenuLayout().get(i2);
+            if (num.intValue() == MainMenuItem.CALLS.getId()) {
+                continue;
+            }
             if (num.intValue() != MainMenuItem.DIVIDER.getId()) {
                 List<MainMenuHelper.MenuItemInfo> listResolveDrawerMenuItems = MainMenuHelper.resolveDrawerMenuItems(num.intValue(), menuContextCreateMenuContext);
                 if (!listResolveDrawerMenuItems.isEmpty()) {

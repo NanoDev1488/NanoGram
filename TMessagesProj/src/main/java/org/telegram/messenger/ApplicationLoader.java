@@ -122,9 +122,6 @@ public class ApplicationLoader extends Application {
     }
 
     public boolean allowToUseYandexMaps() {
-        if (com.exteragram.messenger.maps.yandex.YandexMapsProvider.isSupported() && Build.VERSION.SDK_INT >= 26) {
-            return !com.exteragram.messenger.utils.network.RemoteUtils.getBooleanConfigValue("yandex_maps_only_ru", false).booleanValue() || com.exteragram.messenger.utils.chats.ChatUtils.getInstance().isRussianUser() || com.exteragram.messenger.utils.chats.ChatUtils.getInstance().isFragmentUser();
-        }
         return false;
     }
 
