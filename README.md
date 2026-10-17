@@ -1,86 +1,57 @@
-# exteraGram  
-(Mostly) deobfuscated, compilable source code of the exteraGram client  
+# NanoGram
 
-## [@stopextera](https://t.me/stopextera)  
-Don't use exteraGram, use [exteraless](https://github.com/exteraless/exteraless)  
+> Легковесный, приватный и быстрый форк Telegram для Android на базе exteraGram.  
+> Разработчик: **NanoDev** | Официальный канал: [t.me/WineSquad](https://t.me/WineSquad) | Связь: [t.me/radoqi](https://t.me/radoqi)
 
-## Build  
-Quick build:  
-```bash
-git clone https://github.com/thebadinteger/exteraGram.git
-cd exteraGram
-./gradlew :TMessagesProj_AppStandalone:assembleAfatDebug
-```  
-### Requirements  
-- **JDK:** Java Development Kit 17
-- **Android SDK:**
-  - Compile SDK: `36`
-  - Target SDK: `36`
-  - Min SDK: `24`
-  - Build Tools: `35.0.0`  
-### Native build config (C++ vs Prebuilt)  
-In `gradle.properties`, locate the native build toggle:  
-```properties
-# Set to 'true' to compile all C/C++ libraries from source using Android NDK and CMake
-# Set to 'false' to use precompiled high-performance .so libraries from src/main/jniLibs.
-buildNativeFromSource=false
-```  
-`buildNativeFromSource=true`:  
-**Requirements:**
-- Android NDK version `27.2.12479018` (or compatible)
-- CMake `3.22.1+`
-- At least 16 GB RAM and 40 GB free disk space
+---
 
-### Building
+## 🚀 О проекте
 
-**Windows (PowerShell / CMD):**
-```powershell
-# Universal fat APK:
-.\gradlew.bat :TMessagesProj_AppStandalone:assembleAfatDebug
-# 64-bit ARM APK:
-.\gradlew.bat :TMessagesProj_AppStandalone:assembleArm64Debug
-# 32-bit ARM APK:
-.\gradlew.bat :TMessagesProj_AppStandalone:assembleArmv7Debug
-# Build all variants simultaneously:
-.\gradlew.bat :TMessagesProj_AppStandalone:assembleDebug
+**NanoGram** — модифицированный клиент Telegram на архитектуре ARM64-v8a, очищенный от ненужных фоновых сервисов, тяжелых SDK и телеметрии. Создан для максимальной отзывчивости, приватности и экономии оперативной памяти и трафика.
+
+- **Базовый клиент:** exteraGram (12.10.6)
+- **Идентификатор пакета:** `ru.nano.nanogram`
+- **Версия:** `1.0.0 (12.10.6)`
+- **Целевая архитектура:** `arm64-v8a` (оптимизировано под современные устройства)
+
+---
+
+## ✨ Ключевые изменения и преимущества
+
+### 1. 🪓 Полная очистка от балласта
+- **Звонки и WebRTC:** фоновые службы звонков, VoIP-сервисы и библиотеки WebRTC полностью отключены и обезврежены.
+- **Голосовые модели Vosk:** библиотека `libvosk.so` и оффлайн-распознавание речи удалены (-36 МБ).
+- **Яндекс Карты:** тяжелый SDK карт `libmaps-mobile.so` вырезан (-60 МБ).
+- **Сжатие нативных библиотек:** включен `useLegacyPackaging = true` и вырезаны отладочные символы `FULL`, что уменьшило итоговый размер APK с ~150 МБ до компактных ~70–80 МБ.
+
+### 2. 🛡 Приватность и снятие ограничений
+- **Обход запрета скриншотов:** снят флаг `FLAG_SECURE` в секретных чатах, исчезающих фото и медиа.
+- **Снятие ограничений на пересылку:** сообщения и медиа из каналов с защитой контента (`noforwards`) доступны для копирования, пересылки и локального сохранения.
+- **Призрачный режим:** возможность скрывать статус прочтения и присутствия в сети при необходимости.
+
+### 3. 🎨 Современный интерфейс
+- Обновленные стили заголовков чатов, нижней панели навигации и плавающей кнопки FAB.
+- Быстрые действия с сообщениями (повтор, сохранение, подробности).
+- Папка сохранения переименована в `NanoGram`.
+
+---
+
+## 🛠 Сборка проекта
+
+### Требования
+- **JDK:** 17
+- **Android SDK:** Compile SDK `36`, Target SDK `36`, Min SDK `24`, Build Tools `35.0.0`
+- **NDK (опционально для сборки C++ из исходников):** `27.2.12479018`
+
+### Сборка через Gradle
+```cmd
+gradlew.bat :TMessagesProj_AppStandalone:assembleArm64Release
 ```
 
-**Linux / macOS:**
-```bash
-chmod +x gradlew
-# Universal fat APK:
-./gradlew :TMessagesProj_AppStandalone:assembleAfatDebug
-# 64-bit ARM APK:
-./gradlew :TMessagesProj_AppStandalone:assembleArm64Debug
-# 32-bit ARM APK:
-./gradlew :TMessagesProj_AppStandalone:assembleArmv7Debug
-# Build all variants simultaneously:
-./gradlew :TMessagesProj_AppStandalone:assembleDebug
-```
+Итоговый APK будет находиться в папке:
+`TMessagesProj_AppStandalone/build/outputs/apk/arm64/release/app-arm64-release.apk`
 
-**Output APK files will be generated under:**
-`TMessagesProj_AppStandalone/build/outputs/apk/`
-- `afat/debug/app-afatDebug.apk` (Universal)
-- `arm64/debug/app-arm64Debug.apk` (ARM 64-bit)
-- `armv7/debug/app-armv7Debug.apk` (ARM 32-bit)
+---
 
-## Building with Android Studio
-In the **Build Variants** panel on the left, select your target variant  
-Run or build the project via **Build -> Build Bundle(s) / APK(s) -> Build APK(s)**
-
-## Signing Release APKs
-
-To produce release-signed APKs, configure your `signingConfigs` in `TMessagesProj_AppStandalone/build.gradle` or supply keystore parameters via command line flags:
-
-```bash
-./gradlew :TMessagesProj_AppStandalone:assembleAfatRelease \
-  -Pandroid.injected.signing.store.file=/path/to/keystore.jks \
-  -Pandroid.injected.signing.store.password=YOUR_PASSWORD \
-  -Pandroid.injected.signing.key.alias=YOUR_ALIAS \
-  -Pandroid.injected.signing.key.password=YOUR_PASSWORD
-```
-
-### Official Compilation guide: [DrKLO/Telegram/README.md](https://github.com/DrKLO/Telegram/blob/master/README.md)  
-
-## License
-The original Telegram code is published under the [GNU GPLv2](LICENSE) license
+## 🤖 CI / CD
+В репозитории настроен автоматический пайплайн **GitHub Actions** с кэшированием Gradle-зависимостей и сборкой готового релизного APK при каждом пуше в ветку `main`.

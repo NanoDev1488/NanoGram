@@ -75,7 +75,6 @@ android {
             minifyEnabled false
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), '../TMessagesProj/proguard-rules.pro', '../TMessagesProj/proguard-rules-beta.pro'
-            ndk.debugSymbolLevel = 'FULL'
         }
         standalone {
             debuggable false
@@ -85,7 +84,6 @@ android {
             minifyEnabled false
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), '../TMessagesProj/proguard-rules.pro'
-            ndk.debugSymbolLevel = 'FULL'
         }
         release {
             debuggable false
@@ -95,7 +93,6 @@ android {
             minifyEnabled false
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), '../TMessagesProj/proguard-rules.pro'
-            ndk.debugSymbolLevel = 'FULL'
         }
     }
 
@@ -164,7 +161,13 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    namespace 'org.telegram.messenger.web'
+    namespace 'ru.nano.nanogram'
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 
     lintOptions {
         checkReleaseBuilds false

@@ -15,7 +15,7 @@
         android:name="android.hardware.LOCATION"
         android:required="false"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <uses-permission android:name="com.exteragram.messenger.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="ru.nano.nanogram.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <permission
-        android:name="com.exteragram.messenger.permission.MAPS_RECEIVE"
+        android:name="ru.nano.nanogram.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
     <supports-screens
         android:anyDensity="true"
@@ -145,9 +145,9 @@
     <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
     <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
     <permission
-        android:name="com.exteragram.messenger.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="ru.nano.nanogram.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature"/>
-    <uses-permission android:name="com.exteragram.messenger.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-permission android:name="ru.nano.nanogram.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
     <application
         android:theme="@style/Theme.TMessages.Start"
         android:label="@string/exteraAppName"
@@ -557,13 +557,13 @@
         <activity
             android:theme="@style/Theme.TMessages.Transparent"
             android:name="org.telegram.ui.VoIPPermissionActivity"
-            android:taskAffinity="com.exteragram.messenger.voip"
+            android:taskAffinity="ru.nano.nanogram.voip"
             android:excludeFromRecents="true"
             android:configChanges="screenSize|uiMode|orientation|keyboardHidden|keyboard"/>
         <activity
             android:theme="@style/Theme.TMessages.TransparentWithAlerts"
             android:name="org.telegram.ui.VoIPFeedbackActivity"
-            android:taskAffinity="com.exteragram.messenger.voip_feedback"
+            android:taskAffinity="ru.nano.nanogram.voip_feedback"
             android:excludeFromRecents="true"
             android:configChanges="screenSize|uiMode|orientation|keyboardHidden|keyboard"/>
         <receiver
@@ -778,7 +778,7 @@
         <provider
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.provider"
+            android:authorities="ru.nano.nanogram.provider"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
@@ -787,17 +787,17 @@
         <provider
             android:name="org.telegram.messenger.NotificationImageProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.notification_image_provider"
+            android:authorities="ru.nano.nanogram.notification_image_provider"
             android:grantUriPermissions="true"/>
         <provider
             android:name="com.exteragram.messenger.icons.IconPackProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.icon_pack_provider"
+            android:authorities="ru.nano.nanogram.icon_pack_provider"
             android:grantUriPermissions="true"/>
         <provider
             android:name="org.telegram.messenger.voip.CallNotificationSoundProvider"
             android:exported="true"
-            android:authorities="com.exteragram.messenger.call_sound_provider"/>
+            android:authorities="ru.nano.nanogram.call_sound_provider"/>
         <receiver
             android:name="org.telegram.messenger.ChatsWidgetProvider"
             android:exported="false">
@@ -941,7 +941,7 @@
         <provider
             android:name="com.google.mlkit.common.internal.MlKitInitProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.mlkitinitprovider"
+            android:authorities="ru.nano.nanogram.mlkitinitprovider"
             android:initOrder="99"/>
         <receiver
             android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
@@ -1039,7 +1039,7 @@
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.firebaseinitprovider"
+            android:authorities="ru.nano.nanogram.firebaseinitprovider"
             android:initOrder="100"
             android:directBootAware="true"/>
         <activity
@@ -1112,6 +1112,6 @@
         <provider
             android:name="ru.noties.jlatexmath.JLatexMathInitProvider"
             android:exported="false"
-            android:authorities="com.exteragram.messenger.jlatexmathinitprovider"/>
+            android:authorities="ru.nano.nanogram.jlatexmathinitprovider"/>
     </application>
 </manifest>

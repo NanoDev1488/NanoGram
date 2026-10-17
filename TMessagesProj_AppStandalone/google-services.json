@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:153744097257:android:284b989832b6cd10589578",
         "android_client_info": {
-          "package_name": "com.exteragram.messenger"
+          "package_name": "ru.nano.nanogram"
         }
       },
       "oauth_client": [
@@ -121,7 +121,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:760348033671:android:f6afd7b67eae3860",
         "android_client_info": {
-          "package_name": "com.exteragram.messenger"
+          "package_name": "ru.nano.nanogram"
         }
       },
       "oauth_client": [
