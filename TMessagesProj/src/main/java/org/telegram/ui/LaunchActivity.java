@@ -6003,24 +6003,10 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
     }
 
     public void checkAppUpdate(final boolean z, final Browser.Progress progress) {
-        if (!z) {
-            long jCurrentTimeMillis = System.currentTimeMillis();
-            if (Math.abs(jCurrentTimeMillis - SharedConfig.lastUpdateCheckTime) < 1800000 || Math.abs(jCurrentTimeMillis - ExteraConfig.getUpdateScheduleTimestamp()) < 3600000) {
-                return;
-            }
-        }
-        SharedConfig.lastUpdateCheckTime = System.currentTimeMillis();
-        SharedConfig.saveConfig();
-        final int i = this.currentAccount;
-        UpdaterUtils.getAppUpdate(new Utilities.Callback2() {
-            @Override
-            public final void run(Object obj, Object obj2) {
-                LaunchActivity.this.lambda$checkAppUpdate$138(z, i, progress, (TLRPC.TL_help_appUpdate) obj, (TLRPC.TL_error) obj2);
-            }
-        });
         if (progress != null) {
-            progress.init();
+            progress.end();
         }
+        return;
     }
 
     private void lambda$checkAppUpdate$138(final boolean z, final int i, final Browser.Progress progress, final TLRPC.TL_help_appUpdate tL_help_appUpdate, final TLRPC.TL_error tL_error) {

@@ -37,9 +37,34 @@ jobs:
       - name: Build Standalone Release (ARM64-v8a)
         run: ./gradlew :TMessagesProj_AppStandalone:assembleArm64Release --no-daemon --stacktrace
 
-      - name: Upload Release APK
+      - name: Rename APK for Release
+        run: |
+          cp TMessagesProj_AppStandalone/build/outputs/apk/arm64/release/*.apk NanoGram-v1.0.0-arm64-v8a.apk
+
+      - name: Upload Release APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: NanoGram-arm64-v8a-release
-          path: TMessagesProj_AppStandalone/build/outputs/apk/arm64/release/*.apk
+          path: NanoGram-v1.0.0-arm64-v8a.apk
           if-no-files-found: error
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          tag_name: v1.0.0
+          name: "NanoGram 1.0.0 (12.10.6)"
+          body: |
+            ## 🚀 Релиз NanoGram 1.0.0 (12.10.6)
+            Официальный канал: [t.me/WineSquad](https://t.me/WineSquad) | Разработчик: **NanoDev**
+
+            ### 📦 Основные изменения:
+            - **Пакет:** `ru.nano.nanogram`
+            - **Архитектура:** `arm64-v8a` (оптимизировано под современные смартфоны)
+            - **Очистка от балласта:** вырезаны звонки и WebRTC, оффлайн-распознавание речи Vosk (-36 МБ) и Яндекс Карты (-60 МБ).
+            - **Снятие ограничений:** полный обход `FLAG_SECURE` (скриншоты и запись экрана в секретных чатах и исчезающих медиа) и обход `noforwards` (копирование и сохранение контента из защищенных каналов).
+            - **Приватность:** отключена реклама и спонсорские посты (sponsored messages), отключен статус набора текста («печатает...»).
+            - **Брендинг:** фирменная иконка приложения NanoGram / WineSquad в фиолетово-неоновых тонах.
+          files: NanoGram-v1.0.0-arm64-v8a.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+
